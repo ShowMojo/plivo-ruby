@@ -28,16 +28,16 @@ module Plivo
   end
 
   class RestAPI
-    attr_accessor :auth_id, :auth_token, :url, :version, :api, :headers, :rest
+    attr_accessor :auth_id, :auth_token, :url, :version, :api, :headers, :rest, :ssl_version
 
-    def initialize(auth_id, auth_token, url="https://api.plivo.com", version="v1")
+    def initialize(auth_id, auth_token, url="https://api.plivo.com", version="v1", ssl_version='TLSv1_2')
       @auth_id = auth_id
       @auth_token = auth_token
       @url = url.chomp('/')
       @version = version
       @api = @url + '/' + @version + '/Account/' + @auth_id
       @headers = {"User-Agent" => "RubyPlivo"}
-      @rest = RestClient::Resource.new(@api, @auth_id, @auth_token)
+      @rest = RestClient::Resource.new(@api, {:ssl_version => ssl_version, :user => @auth_id, :password => @auth_token})
     end
 
     def hash_to_params(myhash)
