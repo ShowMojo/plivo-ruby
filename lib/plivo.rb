@@ -30,7 +30,7 @@ module Plivo
   class RestAPI
     attr_accessor :auth_id, :auth_token, :url, :version, :api, :headers, :rest, :ssl_version
 
-    def initialize(auth_id, auth_token, url="https://api.plivo.com", version="v1", ssl_version='TLSv1_2')
+    def initialize(auth_id, auth_token, url="https://api.plivo.com", version="v1", ssl_version='TLSv1')
       @auth_id = auth_id
       @auth_token = auth_token
       @url = url.chomp('/')
